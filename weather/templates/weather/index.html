@@ -1,0 +1,12 @@
+{% extends 'weather/base.html' %}
+
+{% block header %}
+<p>ホームへは<a href="/" class="comeback">こちら</a></p>
+{% endblock header %}
+
+{% block content %}
+    <form method="POST" action="/weather/getweather/">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-gradient">天気取得</button>
+    </form>
+{% endblock content %}
