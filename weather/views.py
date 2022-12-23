@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
+
 # Create your views here.
 def index(request):
     return render(request, "weather/index.html")
@@ -12,8 +13,23 @@ def index(request):
 
 def get_weather(request):
     """天気を取得"""
-    url_osaka = "https://tenki.jp/forecast/6/30/6200/27100/" 
-    html_text = requests.get(url_osaka).text
+    if request.method == 'POST':
+            value = request.POST.get('city', None)
+            if value == 'osakasi':
+                    get_url = 'https://tenki.jp/forecast/6/30/6200/27100/' 
+            elif value == 'hujiiderasi':
+                    get_url = 'https://tenki.jp/forecast/6/30/6200/27226/'
+            elif value == 'shinjuku':
+                    get_url = 'https://tenki.jp/forecast/3/16/4410/13104/'
+    
+    if value == 'osakasi':
+            city_name = '大阪市'
+    elif value == 'hujiiderasi':
+            city_name = '藤井寺市'
+    elif value == 'shinjuku':
+            city_name = '原宿'
+    url = get_url
+    html_text = requests.get(url).text
     soup = BeautifulSoup(html_text, "html.parser")
     rs = soup.find(class_='forecast-days-wrap clearfix')
     # 天気
@@ -48,10 +64,12 @@ def get_weather(request):
     df_3 = [tomorrow_weather, tomorrow_hightemp, 
             tomorrow_lowtemp, tomorrow_rain_1, tomorrow_rain_2, 
             tomorrow_rain_3, tomorrow_rain_4]
+    df_4 = [city_name]
     ctx = {
         "df_data": df_1,
         "df_today": df_2,
         "df_tomo": df_3,
+        "df_city": df_4,
     }
     
     return render(request, "weather/getweather.html", ctx)

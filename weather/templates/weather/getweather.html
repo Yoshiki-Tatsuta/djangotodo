@@ -2,7 +2,9 @@
 
 {% block header %}
     <p>前のページへ<a href="/weather" class="comeback">戻る</a></p>
-    <h2>大阪市の天気</h2>
+    {%for i in df_city%}
+    <h2>{{ i }}の天気</h2>
+    {%endfor%}
 {% endblock header %}
 
 {% block content %}

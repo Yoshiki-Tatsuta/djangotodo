@@ -5,8 +5,14 @@
 {% endblock header %}
 
 {% block content %}
-    <form method="POST" action="/weather/getweather/">
+    <form action="/weather/getweather/" method="POST">
         {% csrf_token %}
-        <button type="submit" class="btn btn-gradient">天気取得</button>
+        <label>市町村を選択しましょう！</label><br>
+        <select name="city">
+            <option value="osakasi">大阪市</option>
+            <option value="hujiiderasi">藤井寺市</option>
+            <option value="shinjuku">新宿</option>
+        </select>
+        <input type="submit" class="btn btn-gradient" value="お天気取得">
     </form>
 {% endblock content %}
