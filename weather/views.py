@@ -17,17 +17,14 @@ def get_weather(request):
             value = request.POST.get('city', None)
             if value == 'osakasi':
                     get_url = 'https://tenki.jp/forecast/6/30/6200/27100/' 
+                    city_name = '大阪市'
             elif value == 'hujiiderasi':
                     get_url = 'https://tenki.jp/forecast/6/30/6200/27226/'
+                    city_name = '藤井寺市'
             elif value == 'shinjuku':
                     get_url = 'https://tenki.jp/forecast/3/16/4410/13104/'
+                    city_name = '原宿'
     
-    if value == 'osakasi':
-            city_name = '大阪市'
-    elif value == 'hujiiderasi':
-            city_name = '藤井寺市'
-    elif value == 'shinjuku':
-            city_name = '原宿'
     url = get_url
     html_text = requests.get(url).text
     soup = BeautifulSoup(html_text, "html.parser")
