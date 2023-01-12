@@ -5,7 +5,7 @@
 {% endblock header %}
 
 {% block content %}
-    <form action="/weather/getweather/" method="POST">
+    <form action="{% url 'weather:getweather' %}" method="POST">
         {% csrf_token %}
         <label>市町村を選択しましょう！</label><br>
         <select name="city">

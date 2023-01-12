@@ -1,14 +1,14 @@
 {% extends 'weather/base.html' %}
 
 {% block header %}
-    <p>前のページへ<a href="/weather" class="comeback">戻る</a></p>
+    <p>前のページへ<a href="{% url 'weather:index' %}" class="comeback">戻る</a></p>
     {%for i in df_city%}
     <h2>{{ i }}の天気</h2>
     {%endfor%}
 {% endblock header %}
 
 {% block content %}
-    <table border="1">
+    <table border="3" bordercolor="#ffb2b2">
         <tr>
             <th>#</th>
             {%for i in df_data%}
@@ -16,13 +16,17 @@
             {%endfor%}
         </tr>
         <tr>
-            <th>今日</th>
+            {%for i in df_day%}
+            <th>今日({{ i }})</th>
+            {%endfor%}
             {%for i in df_today%}
                 <td>{{ i }}</td>
             {%endfor%}
         </tr>
         <tr>
-            <th>明日</th>
+            {%for i in df_day2%}
+            <th>明日({{ i }})</th>
+            {%endfor%}
             {%for i in df_tomo%}
                 <td>{{ i }}</td>
             {%endfor%}

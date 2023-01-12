@@ -4,7 +4,8 @@ from django.http import HttpResponse
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-
+from datetime import date
+import datetime
 
 # Create your views here.
 def index(request):
@@ -51,6 +52,9 @@ def get_weather(request):
     tomorrow_rain_2 = rs_rain[5].text.strip()
     tomorrow_rain_3 = rs_rain[6].text.strip()
     tomorrow_rain_4 = rs_rain[7].text.strip()
+    
+    day_today = date.today()
+    day_tomorrow = date.today() + datetime.timedelta(days=1)
     # 取得結果を格納
     df_1 = ['天気', '最高気温', '最低気温', 
             '降水確率[00-06]', '降水確率[06-12]', '降水確率[12-18]', 
@@ -62,11 +66,17 @@ def get_weather(request):
             tomorrow_lowtemp, tomorrow_rain_1, tomorrow_rain_2, 
             tomorrow_rain_3, tomorrow_rain_4]
     df_4 = [city_name]
+    df_5 = [day_today]
+    df_6 = [day_tomorrow]
+    df_7 = [today_weather]
     ctx = {
         "df_data": df_1,
         "df_today": df_2,
         "df_tomo": df_3,
         "df_city": df_4,
+        "df_day": df_5,
+        "df_day2": df_6,
+        "df_today_wea": df_7,
     }
     
     return render(request, "weather/getweather.html", ctx)

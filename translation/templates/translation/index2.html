@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <title>翻訳サイト</title>
+</head>
+<body>
+    <h1>翻訳</h1>
+    <p>todoは<a href="/">こちら</a>をクリック</p>
+    <label>下に入力</label>
+    <div id="lang">
+        <input type="text" class="text">
+        <input type="button" value="ボタン">
+    </div>
+    <py-script>
+get_test = document.getElementById('lang')
+print(get_test)
+    </py-script>
+</body>
+</html>
