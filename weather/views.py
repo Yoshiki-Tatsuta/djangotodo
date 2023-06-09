@@ -24,7 +24,7 @@ def get_weather(request):
                     city_name = '藤井寺市'
             elif value == 'shinjuku':
                     get_url = 'https://tenki.jp/forecast/3/16/4410/13104/'
-                    city_name = '原宿'
+                    city_name = '新宿'
     
     url = get_url
     html_text = requests.get(url).text

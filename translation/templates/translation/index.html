@@ -1,36 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-  <title>Writing to the page</title>
-
-  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
-  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
-  </head>
-
-  <body>
-    <label>変換前：<input type="text" id="trans"></label>
-    <button py-click="write_to_page()" id="manual">変換</button>
-    <div id="manual-write"></div>
-
-    <py-config>
-        packages = ["deep_translator"]
-    </py-config>
-    <py-script>
-        from deep_translator import GoogleTranslator
-        from pyscript import Element
-
-        def write_to_page():
-            manual_div = Element("manual-write")
-            tr = Element('trans')
-            print(tr.value)
-            translated = GoogleTranslator(source='auto',target='ja').translate(tr.value)
-            print(translated)
-            manual_div.element.innerHTML = translated
-    </py-script>
-  </body>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ai使っておはなし</title>
+</head>
+<body>
+  <h1>AIくんに話しかけてみよう</h1>
+  <p>ホームへは<a href="/">こちら</a></p>
+  <form method="POST" action="{% url 'translation:index' %}">
+    {% csrf_token %}
+    <input type=text name="chatai">
+    <input type="submit" value="送信">
+  </form>
+  <h2>AIくんからの返事</h2>
+  <p>{{ chat_data }}<p>
+</body>
 </html>
-
-

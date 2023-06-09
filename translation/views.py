@@ -1,20 +1,25 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+import openai
 
 # Create your views here.
 
-
-def index(request):
-    """翻訳画面"""
-    return render(request, "translation/index.html")
+openai.api_key = '***'
 
 
-def translation(request):
-    """翻訳結果表示"""
-    if request.method == POST:
-        values = request.POST.get('tr', None)
-        ctx = {
-            "value": values,
-            }
-    return render(request, "weather/getweather.html", ctx)
+def index(request): 
+    if request.method == 'POST':
+        input_data = request.POST['chatai']
+        def ask_gpt(prompt):
+            res = openai.ChatCompletion.create(
+            model='gpt-3.5-turbo',
+            messages=[{'role': 'user', 'content': prompt}])
+            
+            return res.choices[0]['message']['content']
+        
+        chat_data = ask_gpt(input_data)
+        
+        return render(request, 'translation/index.html', {'chat_data': chat_data})
+    else:
+        return render(request, "translation/index.html")
