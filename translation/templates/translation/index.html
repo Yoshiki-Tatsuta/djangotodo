@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ai使っておはなし</title>
+  <title>翻訳</title>
 </head>
 <body>
-  <h1>AIくんに話しかけてみよう</h1>
+  <h1>日本語に翻訳しよう</h1>
   <p>ホームへは<a href="/">こちら</a></p>
   <form method="POST" action="{% url 'translation:index' %}">
     {% csrf_token %}
-    <input type=text name="chatai">
-    <input type="submit" value="送信">
+    <input type=text style="width:200px;" name="trans">
+    <input type="submit" value="変換">
   </form>
-  <h2>AIくんからの返事</h2>
-  <p>{{ chat_data }}<p>
+  <h2>結果</h2>
+  <p>翻訳後：{{ trans_data }}<p>
 </body>
 </html>
