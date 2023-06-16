@@ -1,19 +1,26 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>翻訳</title>
+  <link rel="stylesheet" href={% static 'css/style.css' %}>
 </head>
 <body>
   <h1>日本語に翻訳しよう</h1>
-  <p>ホームへは<a href="/">こちら</a></p>
+  <p>ホームへは<a href="/" class="comeback">こちら</a></p>
   <form method="POST" action="{% url 'translation:index' %}">
     {% csrf_token %}
-    <input type=text style="width:200px;" name="trans">
-    <input type="submit" value="変換">
+    <input class="radio-inline__input" type="radio" name="select-gel" value="gel-ja" id="radio1" checked="checked"><label class="radio-inline__label" for="radio1">日本語に翻訳</label>
+    <input class="radio-inline__input" type="radio" name="select-gel" value="gel-en" id="radio2"><label class="radio-inline__label" for="radio2">英語に翻訳</label>
+    <br>
+    <textarea name="trans" cols="100" rows="10" wrap="soft"></textarea>
+    <br>
+    <input class="btn btn-gradient" type="submit" value="変換">
   </form>
-  <h2>結果</h2>
-  <p>翻訳後：{{ trans_data }}<p>
+  <br>
+  <p>翻訳：{{ trans_data }}<p>
 </body>
 </html>
