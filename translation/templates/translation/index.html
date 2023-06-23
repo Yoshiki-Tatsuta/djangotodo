@@ -9,7 +9,7 @@
   <link rel="stylesheet" href={% static 'css/style.css' %}>
 </head>
 <body>
-  <h1>日本語に翻訳しよう</h1>
+  <h1>翻訳しよう</h1>
   <p>ホームへは<a href="/" class="comeback">こちら</a></p>
   <form method="POST" action="{% url 'translation:index' %}">
     {% csrf_token %}
@@ -21,6 +21,13 @@
     <input class="btn btn-gradient" type="submit" value="変換">
   </form>
   <br>
-  <p>翻訳：{{ trans_data }}<p>
+  <p>入力：</p>
+  <div style="display:inline-block; padding: 10px; margin-bottom: 10px; border: 1px dotted #333333;">
+    <p>{{ input_data }}</p>
+  </div>
+  <p>翻訳：</p>
+  <div style="display:inline-block; padding: 10px; margin-bottom: 10px; border: 5px double #333333;">
+    <p>{{ trans_data }}</p>
+  </div>
 </body>
 </html>

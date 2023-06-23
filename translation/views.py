@@ -10,11 +10,11 @@ def index(request):
         if 'gel-ja' == request.POST['select-gel']:
             input_data = request.POST['trans']
             trans_data = GoogleTranslator(source='auto', target='ja').translate(input_data)      
-            return render(request, 'translation/index.html', {'trans_data': trans_data})
+            return render(request, 'translation/index.html', {'trans_data': trans_data, 'input_data': input_data})
         elif 'gel-en' == request.POST['select-gel']:
             input_data = request.POST['trans']
             trans_data = GoogleTranslator(source='auto', target='en').translate(input_data)
-            return render(request, 'translation/index.html', {'trans_data': trans_data})
+            return render(request, 'translation/index.html', {'trans_data': trans_data, 'input_data': input_data})
         else:
             return render(request, "translation/index.html")
     else:
